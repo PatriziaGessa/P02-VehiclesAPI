@@ -11,7 +11,6 @@ import com.udacity.vehicles.service.CarService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.hateoas.Resource;
@@ -48,7 +47,8 @@ class CarController {
      */
     @GetMapping
     Resources<Resource<Car>> list() {
-        List<Resource<Car>> resources = carService.list().stream().map(assembler::toResource)
+        List<Resource<Car>> resources = carService.list().stream()
+                .map(assembler::toResource)
                 .collect(toList());
         return new Resources<>(resources,
                 linkTo(methodOn(CarController.class).list()).withSelfRel());
@@ -90,13 +90,9 @@ class CarController {
      */
     @PutMapping("/{id}")
     ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
-        /**
-         * TODO: Set the id of the input car object to the `id` input.
-         * TODO: Save the car using the `save` method from the Car service
-         * TODO: Use the `assembler` on that updated car and return as part of the response.
-         *   Update the first line as part of the above implementing.
-         */
-        Resource<Car> resource = assembler.toResource(new Car());
+        car.setId(id); // set the id of the input Car Object to the 'id' input
+        Car carSaved = carService.save(car); // save the car using 'save' method from the Car service Object
+        Resource<Car> resource = assembler.toResource(carSaved); // returns as part of the response using the 'assembler' on the updated car
         return ResponseEntity.ok(resource);
     }
 
