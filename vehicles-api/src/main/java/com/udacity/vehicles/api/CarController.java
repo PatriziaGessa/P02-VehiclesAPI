@@ -63,7 +63,6 @@ class CarController {
     @GetMapping("/{id}")
     Resource<Car> get(@PathVariable Long id) {
         Car car = carService.findById(id);
-
         return assembler.toResource(car);
     }
 
@@ -90,9 +89,9 @@ class CarController {
      */
     @PutMapping("/{id}")
     ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
-        car.setId(id); // set the id of the input Car Object to the 'id' input
-        Car carSaved = carService.save(car); // save the car using 'save' method from the Car service Object
-        Resource<Car> resource = assembler.toResource(carSaved); // returns as part of the response using the 'assembler' on the updated car
+        car.setId(id); // Set the id of the input Car Object to the 'id' input
+        Car carSaved = carService.save(car); // Save the car using 'save' method from the Car service Object
+        Resource<Car> resource = assembler.toResource(carSaved); // Returns as part of the response using the 'assembler' on the updated car
         return ResponseEntity.ok(resource);
     }
 

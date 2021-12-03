@@ -96,9 +96,10 @@ public class CarControllerTest {
     public void listCars() throws Exception {
         Car car = getCar();
         createCar();
-        mvc.perform(get(new URI("/cars"))
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8))
+        mvc.perform(
+                        get(new URI("/cars"))
+                                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                                .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
         verify(carService, times(1)).list();
@@ -114,9 +115,10 @@ public class CarControllerTest {
     public void findCar() throws Exception {
         Car car = getCar();
         createCar();
-        mvc.perform(get(new URI("/cars/1"))
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8))
+        mvc.perform(
+                        get(new URI("/cars/1"))
+                                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                                .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
         verify(carService, times(1)).findById(1L);
@@ -129,9 +131,10 @@ public class CarControllerTest {
      */
     @Test
     public void deleteCar() throws Exception {
-        mvc.perform(delete(new URI("/cars/1"))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON_UTF8))
+        mvc.perform(
+                        delete(new URI("/cars/1"))
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isNoContent());
 
         verify(carService, times(1)).delete(1L);
@@ -140,7 +143,7 @@ public class CarControllerTest {
 
 
     /**
-     * Creates an example Car object for use in testing.
+     * Creates an example Car Object for use in testing.
      *
      * @return an example Car object
      */
