@@ -31,6 +31,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import static org.junit.Assert.*;
 
 
 import static org.mockito.Mockito.verify;
@@ -123,6 +125,7 @@ public class CarControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
         verify(carService, times(1)).findById(1L);
     }
+
 
     /**
      * Tests the deletion of a single car by ID.
